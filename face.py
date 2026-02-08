@@ -1,5 +1,6 @@
 import time, os, random, sys
 
+
 def text_speed(text, delay=0.1):
         for char in text:
             sys.stdout.write(char)
@@ -10,10 +11,12 @@ class Display():
     clear = lambda: os.system("cls")
 
 
-    def loading_screen_animation(duration, delay, almost):
+    def loading_screen_animation(duration, delay, almost, secret_chance):
         """Animation when the game starts"""
+
+        # Animation process
         frames = ["|", "/", "—", "\\"]
-        end_time = time.time() + duration  # 5 - Duration
+        end_time = time.time() + duration
 
         print(f">>> the system is starting... ", end=" ", flush=True)
 
@@ -24,17 +27,18 @@ class Display():
         print(f"\n>>> connection terminated", end="", flush=True)
         time.sleep(almost)
 
-        secret_message = random.randint(0, 100)
+        # Secret message
+        secret_message = random.randint(0, secret_chance)
         if secret_message == 0:
             print("\nYou think this is funny?")
         elif secret_message == 1:
             print("\nNo remorse.")
         elif secret_message == 2:
             print("\nTurn around.")
-        time.sleep(0.08)
+        time.sleep(0.05)
 
     def render_menu():
-        items = ["New Game", "Continue", "Exit Game"]
+        items = ["Start a New Game", "Continue", "Exit Game"]
         title = "ANORAB System"
 
         max_len = max(len(title), max(len(i) for i in items))
@@ -71,9 +75,12 @@ class Display():
             else:
                  print("Error: Start - S, Continue - C, Exit - Q")
                  continue
+        return cmd
 
-    def exiting_screen_animation(duration, delay, almost):
+    def exiting_screen_animation(duration, delay, almost, secret_chance):
         """Animation when the game ends"""
+
+        # Animation process
         frames = ["|", "/", "—", "\\"]
         end_time = time.time() + duration
 
@@ -86,7 +93,8 @@ class Display():
         print(f"\n>>> system deactivated", end="", flush=True)
         time.sleep(almost)
 
-        secret_message = random.randint(0, 100)
+        # Secret message
+        secret_message = random.randint(0, secret_chance)
         if secret_message == 0:
             print("\nYou will not survive.")
         elif secret_message == 1:

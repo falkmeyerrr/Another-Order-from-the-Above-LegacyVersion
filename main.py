@@ -3,36 +3,33 @@
 
 # Game libs
 from face import Display as d
-from terminal_cockpit import Monitor as m
+from terminal_cockpit import GameMonitor as gm
+from terminal_cockpit import Texts as t
+import messages as mess
 
-# def loading_screen_animation(duration, delay, almost):
-#     """Animation when the game starts"""
-#     frames = ["|", "/", "—", "\\"]
-#     end_time = time.time() + duration  # 5 - Duration
-
-#     print(f"the system is starting... ", end=" ", flush=True)
-
-#     while time.time() < end_time:
-#         for frame in frames:
-#             print(f"\b{frame}", end="", flush=True)
-#             time.sleep(delay)
-#     print(f"\nconnection terminated", end="", flush=True)
-#     time.sleep(almost)
-
+def test():
+    text = mess.game_start # "Here's an example of the glitch effect!"
+    t.text_glitch_effect(text, 0.002, 0.001)
 
 def game():
     d.clear()
-    d.loading_screen_animation(5, 0.1, 2)
+    d.loading_screen_animation(5, 0.1, 2, 5)
     
     d.clear()
-    d.render_menu()
+    main_menu = d.render_menu()
+    if main_menu != 'q':
+        t.intro(mess.game_start)
+    else:
+        pass
 
     d.clear()
-    d.exiting_screen_animation(5, 0.1, 2)
+    d.exiting_screen_animation(5, 0.1, 2, 5)
     d.clear()
 
 
 if __name__ == "__main__":
-    game()
+    d.clear()
+    test()
+    #game()
 else:
     print("Something went wrong...")
