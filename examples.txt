@@ -1,0 +1,2 @@
+generate_world_formula = DIFFICULTY-*COUNTRY NAME-*RULER NAME-IDEOLOGY
+*COUNTRY NAME, RULER NAME - optional || 0

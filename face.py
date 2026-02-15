@@ -1,15 +1,16 @@
 import time, os, random, sys
+import messages as mess
+import builder as b
 
-
-def text_speed(text, delay=0.1):
-        for char in text:
-            sys.stdout.write(char)
-            sys.stdout.flush()
-            time.sleep(delay)
+# class Basics():
+#     def text_speed(text, delay=0.1):
+#             """Blinking text for the print"""
+#             for char in text:
+#                 sys.stdout.write(char)
+#                 sys.stdout.flush()
+#                 time.sleep(delay)
 
 class Display():
-    clear = lambda: os.system("cls")
-
 
     def loading_screen_animation(duration, delay, almost, secret_chance):
         """Animation when the game starts"""
@@ -38,44 +39,21 @@ class Display():
         time.sleep(0.05)
 
     def render_menu():
-        items = ["Start a New Game", "Continue", "Exit Game"]
-        title = "ANORAB System"
-
-        max_len = max(len(title), max(len(i) for i in items))
-
-        width = max_len + 2
-        top = "┌" + "─" * width + "┐"
-        mid = "│" + " " * width + "│"
-        sep = "├" + "─" * width + "┤"
-        bottom = "└" + "─" * width + "┘"
-
-        text_speed("┌" + "─" * width + "┐\n", 0.008)
-        text_speed("│" + title.center(width) + "│\n", 0.008)
-        text_speed(sep + "\n", 0.008)
-
-        for item in items:
-            text_speed("│ " + item.ljust(max_len) + " │\n", 0.008)
-
-        text_speed("└" + "─" * width + "┘\n", 0.008)
-
-
-        commands = ['s', 'c', 'q']
-
-        while True:
-            sys.stdout.write("\r>>> ")
-            time.sleep(0.5)
-            sys.stdout.write("\r    ")
-            time.sleep(0.5)
-            
-            sys.stdout.write("\r>>> ")
-            cmd = input().strip().lower()
-            
-            if cmd in commands:
-                break
-            else:
-                 print("Error: Start - S, Continue - C, Exit - Q")
-                 continue
+        """Loading the main menu of the game"""
+        b.Build.build_table('ANORAB', b.Basics.items_main)
+        move = ['s', 'c', 'q']
+        cmd = b.Basics.command_line(move)
         return cmd
+
+    def new_game_configuration():
+        """Configure the game at the start"""
+        b.Build.build_table('Configuration of the game', b.Basics.helpy_tip)
+        time.sleep(0.5)
+        generate_formula = input(">>> Write your game formula to start: ")
+        return generate_formula
+
+
+        
 
     def exiting_screen_animation(duration, delay, almost, secret_chance):
         """Animation when the game ends"""
@@ -102,3 +80,13 @@ class Display():
         elif secret_message == 2:
             print("\nThe Cost of Revenge is always highest.")
         time.sleep(0.2)
+
+class GameMonitor():
+
+
+    def generate_main_table(current_data, mailbox, news, statictics, end: bool):
+        while end:
+            pass
+    
+
+
